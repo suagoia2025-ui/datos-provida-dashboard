@@ -2,13 +2,13 @@
 
 ## 🤝 Nuestro Compromiso
 
-En el interés de fomentar un ambiente abierto y acogedor, nosotros como contribuidores y mantenedores nos comprometemos a hacer de la participación en nuestro proyecto y nuestra comunidad una experiencia libre de acoso para todos, independientemente de edad, tamaño corporal, discapacidad, etnia, identidad y expresión de género, nivel de experiencia, educación, estatus socioeconómico, nacionalidad, apariencia personal, raza, religión o identidad y orientación sexual.
+En el interés de fomentar un ambiente abierto y acogedor, nosotros como contribuidores y mantenedores nos comprometemos a hacer de la participación en nuestro proyecto y nuestra comunidad una experiencia libre de acoso para todos, independientemente de edad, tamaño corporal, discapacidad, etnia, sexo, nivel de experiencia, educación, estatus socioeconómico, nacionalidad, apariencia personal, raza, religión y orientación sexual.
 
 ## 📋 Nuestros Estándares
 
 ### Ejemplos de Comportamiento que Contribuye a Crear un Ambiente Positivo
 
-- ✅ Usar lenguaje acogedor e inclusivo
+- ✅ Usar lenguaje acogedor
 - ✅ Ser respetuoso de diferentes puntos de vista y experiencias
 - ✅ Aceptar críticas constructivas con gracia
 - ✅ Enfocarse en lo que es mejor para la comunidad
@@ -16,17 +16,19 @@ En el interés de fomentar un ambiente abierto y acogedor, nosotros como contrib
 - ✅ Dar crédito apropiado por contribuciones
 - ✅ Ser paciente con newcomers
 - ✅ Ofrecer ayuda y mentoría cuando sea posible
+- ✅ El uso de las tecnologias de la informaciòn en Pro de la vida
 
 ### Ejemplos de Comportamiento Inaceptable
 
 - ❌ El uso de lenguaje o imágenes sexualizadas
+- ❌ Propagacion de ideologias
 - ❌ Trolling, comentarios insultantes/despectivos, y ataques personales o políticos
 - ❌ Acoso público o privado
 - ❌ Publicar información privada de otros sin permiso explícito
 - ❌ Conducta que razonablemente podría considerarse inapropiada en un entorno profesional
 - ❌ Ignorar o rechazar sistemáticamente las contribuciones de alguien
 - ❌ Spam o autopromoción excesiva
-- ❌ Compartir contenido ofensivo o discriminatorio
+- ❌ Compartir contenido ofensivo o discriminatorio, por creencias religiosas o posturas politicas
 
 ## 👥 Nuestras Responsabilidades
 
@@ -56,7 +58,7 @@ Todas las quejas serán revisadas e investigadas y resultarán en una respuesta 
 
 ### Proceso de Reporte
 
-1. **Reportar**: Envía un email detallado a conduct@datosprovidadashboard.com
+1. **Reportar**: Envía un email detallado a suago.ia2025@gmail.com
 2. **Confirmación**: Recibirás confirmación de recibo en 24 horas
 3. **Investigación**: Revisaremos el reporte (2-7 días)
 4. **Decisión**: Tomaremos acción apropiada
@@ -187,10 +189,10 @@ Este Código de Conducta puede ser revisado periódicamente. Los cambios signifi
 
 ## 📞 Contacto
 
-**Email general**: conduct@datosprovidadashboard.com  
+**Email general**: suago.ia2025@gmail.com 
 **Equipo de Code of Conduct**:
-- Persona 1 (Mantenedor) - email1@example.com
-- Persona 2 (Mantenedor) - email2@example.com
+- Persona 1 (Mantenedor) - suago.ia2025@gmail.com
+- Persona 2 (Mantenedor) - suago.ia2025@gmail.com
 
 **Mediación externa**: (A configurar si es necesario)
 
