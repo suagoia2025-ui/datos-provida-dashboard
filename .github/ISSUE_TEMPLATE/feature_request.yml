@@ -1,0 +1,116 @@
+name: 💡 Feature Request
+description: Sugerir una nueva funcionalidad
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ¡Gracias por sugerir una mejora! Queremos escuchar tus ideas.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: ¿Está relacionado a un problema?
+      description: Descripción clara del problema que esta feature resolvería
+      placeholder: "Siempre me frustra cuando..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Solución Propuesta
+      description: Descripción clara de la funcionalidad que te gustaría
+      placeholder: "Me gustaría que..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas Consideradas
+      description: ¿Has considerado otras soluciones o features alternativas?
+      placeholder: "Otra opción sería..."
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área del Proyecto
+      description: ¿A qué parte del proyecto aplica?
+      options:
+        - Frontend - UI/UX
+        - Frontend - Gráficos
+        - Frontend - Performance
+        - Backend - API
+        - Backend - Base de Datos
+        - Backend - Integraciones
+        - DevOps
+        - Documentación
+        - Otro
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Prioridad Sugerida
+      description: ¿Qué tan importante es esta feature para ti?
+      options:
+        - Crítica - Necesaria para usar el producto
+        - Alta - Muy importante
+        - Media - Sería útil
+        - Baja - Nice to have
+
+  - type: dropdown
+    id: effort
+    attributes:
+      label: Esfuerzo Estimado
+      description: Si tienes experiencia técnica, ¿cuánto esfuerzo crees que requiere?
+      options:
+        - Pequeño - Horas
+        - Medio - Días
+        - Grande - Semanas
+        - No estoy seguro
+
+  - type: textarea
+    id: mockups
+    attributes:
+      label: Mockups/Diseños
+      description: Si tienes diseños o mockups, compártelos aquí
+      placeholder: Arrastra y suelta imágenes...
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Ejemplos
+      description: ¿Conoces otros proyectos que implementen algo similar?
+      placeholder: "Similar a lo que hace X en Y..."
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto Adicional
+      description: Cualquier otra información relevante
+      placeholder: Contexto adicional...
+
+  - type: checkboxes
+    id: willing
+    attributes:
+      label: Contribución
+      description: ¿Estarías dispuesto a contribuir?
+      options:
+        - label: Estaría dispuesto a implementar esta feature
+        - label: Puedo ayudar con diseño/mockups
+        - label: Puedo ayudar con testing
+        - label: Puedo ayudar con documentación
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: He buscado en issues existentes y esta feature no ha sido sugerida
+          required: true
+        - label: He considerado cómo encaja con el roadmap del proyecto
+          required: true

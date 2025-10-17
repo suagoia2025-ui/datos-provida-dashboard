@@ -1,0 +1,17 @@
+{
+  "root": true,
+  "extends": ["next/core-web-vitals"],
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
+  "rules": {
+    "@next/next/no-html-link-for-pages": "off",
+    "no-console": ["error", { "allow": ["error"] }],
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
+    "eqeqeq": ["error", "always"],
+    "curly": ["error", "all"],
+    "prefer-const": "error"
+  }
+}
+
+

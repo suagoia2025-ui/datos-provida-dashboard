@@ -1,0 +1,141 @@
+name: 🐛 Bug Report
+description: Reportar un bug o problema
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por tomarte el tiempo de reportar este bug. Por favor completa la información abajo.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción del Bug
+      description: Descripción clara y concisa del problema
+      placeholder: Describe qué salió mal...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Pasos para Reproducir
+      description: Pasos detallados para reproducir el problema
+      placeholder: |
+        1. Ve a '...'
+        2. Click en '....'
+        3. Scroll down a '....'
+        4. Ver error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamiento Esperado
+      description: Descripción clara de lo que esperabas que sucediera
+      placeholder: Describe qué debería pasar...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Comportamiento Actual
+      description: Qué está pasando actualmente
+      placeholder: Describe qué está pasando...
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Si aplica, agrega screenshots del problema
+      placeholder: Arrastra y suelta imágenes aquí...
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área Afectada
+      description: ¿Qué parte del proyecto está afectada?
+      options:
+        - Frontend - Dashboard
+        - Frontend - Gráficos
+        - Frontend - Filtros
+        - Backend - API
+        - Backend - Base de Datos
+        - Backend - Integraciones
+        - Deployment
+        - Documentación
+        - Otro
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severidad
+      description: ¿Qué tan severo es este bug?
+      options:
+        - Crítico - Bloquea funcionalidad principal
+        - Alto - Funcionalidad importante afectada
+        - Medio - Funcionalidad afectada con workaround
+        - Bajo - Problema menor
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Versión
+      description: ¿Qué versión del proyecto estás usando?
+      placeholder: "1.0.0"
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Navegador
+      description: ¿Qué navegador estás usando? (si aplica)
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - Otro
+      multiple: true
+
+  - type: input
+    id: os
+    attributes:
+      label: Sistema Operativo
+      description: ¿Qué OS estás usando?
+      placeholder: "Windows 11, macOS 14, Ubuntu 22.04"
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs Relevantes
+      description: Por favor copia y pega cualquier log relevante
+      render: shell
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto Adicional
+      description: Cualquier otra información relevante sobre el problema
+      placeholder: Información adicional...
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Por favor confirma lo siguiente
+      options:
+        - label: He buscado en issues existentes y este bug no ha sido reportado
+          required: true
+        - label: He probado con la última versión
+          required: true
+        - label: He incluido todos los pasos para reproducir
+          required: true

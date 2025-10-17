@@ -1,0 +1,23 @@
+# Configuración de sponsors/donaciones (opcional)
+# Descomenta y completa si decides aceptar donaciones
+
+# GitHub Sponsors
+# github: [tu-usuario]
+
+# Patreon
+# patreon: tu-usuario
+
+# Open Collective
+# open_collective: tu-proyecto
+
+# Ko-fi
+# ko_fi: tu-usuario
+
+# Buy Me a Coffee
+# custom: ['https://www.buymeacoffee.com/tu-usuario']
+
+# PayPal
+# custom: ['https://www.paypal.me/tu-usuario']
+
+# Crypto (Bitcoin, Ethereum, etc.)
+# custom: ['Bitcoin: tu-address', 'Ethereum: tu-address']
