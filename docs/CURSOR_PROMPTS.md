@@ -11,33 +11,64 @@ Este documento contiene prompts optimizados para usar en Cursor AI durante el de
 ### Prompt 1.1: Crear estructura del Frontend
 
 ```
-Crea la estructura inicial de un proyecto Next.js 14 con las siguientes características:
+Necesito configurar un proyecto Next.js 14 completo para el frontend de mi aplicación.
 
-ESTRUCTURA:
-- App Router (no Pages Router)
-- TypeScript estricto
-- Tailwind CSS configurado
-- Carpetas: components, services, hooks, types, utils, constants
+UBICACIÓN: Crea todo dentro de la carpeta frontend/ en la raíz del proyecto.
 
-CONFIGURACIÓN:
-- next.config.js optimizado para producción
-- tsconfig.json con strict mode
-- tailwind.config.js con tema personalizado
-- .eslintrc.json con reglas estrictas
+TECNOLOGÍAS:
+- Next.js 14 con App Router
+- TypeScript en strict mode
+- Tailwind CSS
+- ESLint con reglas estrictas
+- Prettier
+
+ESTRUCTURA DE CARPETAS dentro de frontend/:
+frontend/
+├── app/
+│   ├── layout.tsx (con metadata SEO)
+│   └── page.tsx (dashboard principal vacío)
+├── components/
+│   └── ui/
+│       ├── Button.tsx
+│       ├── Card.tsx
+│       └── Input.tsx
+├── services/
+│   └── api.ts (cliente Axios configurado)
+├── hooks/
+│   └── .gitkeep
+├── types/
+│   └── index.ts (tipos básicos)
+├── utils/
+│   └── .gitkeep
+├── constants/
+│   └── .gitkeep
+├── public/
+└── styles/
+
+ARCHIVOS DE CONFIGURACIÓN:
+- next.config.js (optimizado)
+- tsconfig.json (strict mode)
+- tailwind.config.js (con tema personalizado)
+- .eslintrc.json (reglas estrictas)
 - prettier.config.js
+- .env.example
+- package.json con scripts: dev, build, start, lint, type-check
 
-ARCHIVOS INICIALES:
-- src/app/layout.tsx con metadata SEO
-- src/app/page.tsx como dashboard principal
-- src/components/ui/ con componentes base (Button, Card, Input)
-- src/services/api.ts para llamadas HTTP
-- src/types/index.ts con tipos TypeScript básicos
+REQUISITOS ESPECÍFICOS:
+1. App Router (NO Pages Router)
+2. TypeScript strict mode obligatorio
+3. Componentes UI base funcionales y tipados
+4. Servicio API apuntando a http://localhost:4000/api/v1
+5. Metadata SEO en layout.tsx
+6. README.md en frontend/ con instrucciones
 
-SCRIPTS package.json:
-- dev, build, start, lint, type-check
+IMPORTANTE:
+- NO uses 'src/' folder, usa app/ directamente
+- Usa convenciones modernas de Next.js 14
+- Todos los componentes deben ser "use client" donde sea necesario
+- Crea archivos .gitkeep para carpetas vacías
 
-Usa las mejores prácticas de Next.js 14 y convenciones modernas.
-```
+Crea toda esta estructura completa ahora.
 
 ---
 
