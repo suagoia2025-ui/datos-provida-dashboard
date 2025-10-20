@@ -75,41 +75,179 @@ Crea toda esta estructura completa ahora.
 ### Prompt 1.2: Crear estructura del Backend
 
 ```
-Crea la estructura inicial de una API REST con Node.js y Express con estas características:
+Crea una API REST profesional con Node.js, Express y TypeScript siguiendo arquitectura limpia y principios SOLID.
 
-ESTRUCTURA:
-- src/controllers/ - Controladores REST
-- src/services/ - Lógica de negocio
-- src/repositories/ - Acceso a datos
-- src/middlewares/ - Middlewares (auth, validation, error)
-- src/routes/ - Definición de rutas
-- src/validators/ - Schemas de validación con Zod
-- src/integrations/ - Conectores a APIs externas
-- src/types/ - TypeScript types
-- src/utils/ - Utilidades
-- src/config/ - Configuración y variables de entorno
+UBICACIÓN: Crea todo dentro de la carpeta backend/ en la raíz del proyecto.
 
-ARCHIVOS PRINCIPALES:
-- src/index.ts - Entry point con Express app
-- src/config/database.ts - Conexión Prisma
-- src/config/env.ts - Validación de env vars con Zod
-- src/middlewares/errorHandler.ts - Manejo global de errores
-- src/middlewares/requestLogger.ts - Logging de requests
-- src/routes/index.ts - Router principal
+STACK TECNOLÓGICO:
+- Node.js 18+ con TypeScript en strict mode
+- Express.js como framework web
+- Prisma ORM para acceso a datos
+- Zod para validación y type-safety de env vars
+- ESLint + Prettier para calidad de código
 
-CONFIGURACIÓN:
-- TypeScript con strict mode
-- ESLint + Prettier
-- Prisma ORM configurado
-- Scripts en package.json: dev, build, start, migrate
+ARQUITECTURA (Layered Architecture + Repository Pattern):
+backend/
+├── src/
+│   ├── index.ts                    # Entry point - Express app setup
+│   ├── server.ts                   # Server initialization
+│   ├── app.ts                      # Express app configuration
+│   ├── controllers/                # HTTP request handlers
+│   │   ├── health.controller.ts
+│   │   └── .gitkeep
+│   ├── services/                   # Business logic layer
+│   │   └── .gitkeep
+│   ├── repositories/               # Data access layer (Prisma)
+│   │   └── .gitkeep
+│   ├── middlewares/                # Express middlewares
+│   │   ├── errorHandler.ts        # Global error handling
+│   │   ├── requestLogger.ts       # Request logging
+│   │   ├── validateRequest.ts     # Zod validation middleware
+│   │   └── notFound.ts            # 404 handler
+│   ├── routes/                     # Route definitions
+│   │   ├── index.ts               # Main router
+│   │   └── health.routes.ts       # Health check routes
+│   ├── validators/                 # Zod schemas
+│   │   └── .gitkeep
+│   ├── integrations/              # External API connectors
+│   │   └── .gitkeep               # (WHO, World Bank - Issue #3)
+│   ├── config/                     # Configuration
+│   │   ├── env.ts                 # Environment validation (Zod)
+│   │   ├── database.ts            # Prisma client singleton
+│   │   └── cors.ts                # CORS configuration
+│   ├── types/                      # TypeScript type definitions
+│   │   ├── index.ts               # Common types
+│   │   ├── express.d.ts           # Express type extensions
+│   │   └── api.types.ts           # API response types
+│   └── utils/                      # Utility functions
+│       ├── logger.ts              # Winston logger setup
+│       ├── asyncHandler.ts        # Async error wrapper
+│       └── AppError.ts            # Custom error class
+├── prisma/
+│   └── schema.prisma              # Prisma schema (sin modelos aún)
+├── package.json
+├── tsconfig.json
+├── .eslintrc.json
+├── prettier.config.js
+├── nodemon.json
+├── .env.example
+├── .gitignore
+└── README.md
 
-PATTERNS:
-- Repository pattern para datos
-- Service layer para lógica
-- Dependency injection donde sea posible
-- Error handling consistente
+CONFIGURACIÓN DE ARCHIVOS CLAVE:
 
-Usa Express, TypeScript, Prisma y mejores prácticas de arquitectura limpia.
+1. package.json debe incluir scripts:
+   - "dev": nodemon con ts-node
+   - "build": compilación TypeScript
+   - "start": ejecutar build
+   - "lint": ESLint
+   - "type-check": tsc --noEmit
+   - "format": Prettier
+
+2. tsconfig.json (strict mode):
+   - strict: true
+   - esModuleInterop: true
+   - skipLibCheck: true
+   - target: ES2022
+   - module: commonjs
+   - outDir: dist
+
+3. Prisma schema básico:
+   - datasource: postgresql
+   - generator: prisma-client-js
+   - SIN modelos todavía (Issue #4)
+
+SERVIDOR EXPRESS:
+
+1. Configuración:
+   - Puerto: 4000
+   - CORS habilitado para http://localhost:3000
+   - JSON body parser
+   - Helmet para seguridad
+   - Morgan para logging HTTP
+
+2. Middleware Stack (en orden):
+   - CORS
+   - Helmet
+   - Body parser
+   - Request logger
+   - Routes
+   - 404 handler
+   - Error handler global
+
+3. Endpoint Health Check (GET /health):
+   Response format:
+   {
+     "success": true,
+     "data": {
+       "status": "ok",
+       "timestamp": "ISO8601",
+       "uptime": seconds,
+       "environment": "development|production"
+     }
+   }
+
+PATRONES Y PRINCIPIOS:
+
+1. Dependency Injection:
+   - Inyectar dependencias en constructores
+   - Facilitar testing y mantenibilidad
+
+2. Repository Pattern:
+   - Abstraer acceso a datos
+   - Repositorios usan Prisma Client
+
+3. Service Layer Pattern:
+   - Lógica de negocio en services
+   - Controllers delgados (solo HTTP)
+
+4. Error Handling:
+   - Custom AppError class con statusCode
+   - asyncHandler wrapper para async routes
+   - errorHandler middleware catch-all
+
+5. Response Format Consistency:
+   Success: { success: true, data: {...} }
+   Error: { success: false, error: { message, code, details? } }
+
+VARIABLES DE ENTORNO (.env.example):
+
+NODE_ENV=development
+PORT=4000
+DATABASE_URL=postgresql://user:password@localhost:5432/provida_db
+CORS_ORIGIN=http://localhost:3000
+LOG_LEVEL=debug
+
+VALIDACIÓN CON ZOD:
+- Validar todas las env vars en config/env.ts
+- Tipar process.env correctamente
+- Fallar rápido si config es inválida
+
+CALIDAD DE CÓDIGO:
+- ESLint con reglas estrictas
+- Prettier configurado
+- TypeScript strict mode
+- No any types
+- Imports organizados
+
+README.md debe incluir:
+- Descripción del backend
+- Requisitos previos
+- Instalación
+- Variables de entorno
+- Scripts disponibles
+- Estructura del proyecto
+- Arquitectura
+- Cómo correr localmente
+
+IMPORTANTE:
+- NO crear modelos en Prisma todavía (Issue #4)
+- NO implementar lógica de negocio todavía
+- SOLO estructura y configuración base
+- Código production-ready desde el inicio
+- Todos los archivos con comentarios JSDoc
+
+Genera toda esta estructura completa ahora.
 ```
 
 ---
