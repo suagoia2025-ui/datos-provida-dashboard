@@ -1,0 +1,146 @@
+// Prisma Schema for Datos Pro-Vida Dashboard
+// PostgreSQL database schema with UUIDs, enums, and hierarchical regions
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ==========================================
+// ENUMS
+// ==========================================
+
+/// Type of geographical region (hierarchical: global -> continent -> country -> state)
+enum RegionType {
+  global
+  continent
+  country
+  state
+}
+
+/// Categories of pro-life indicators tracked in the system
+enum Category {
+  abortion
+  euthanasia
+  gender_ideology
+  drugs
+  stem_cells
+  human_trafficking
+}
+
+// ==========================================
+// MODELS
+// ==========================================
+
+/// Geographic regions with hierarchical structure (Global -> Continents -> Countries -> States)
+/// Supports nested regions for flexible data organization
+model Region {
+  id          String     @id @default(uuid())
+  name        String     @db.VarChar(200) // e.g., "Colombia", "América Latina"
+  code        String     @db.VarChar(10) // ISO code: "CO", "US", "LATAM"
+  type        RegionType // Hierarchical level
+  parentId    String?    @map("parent_id") // Self-referential for hierarchy
+  coordinates Json? // GeoJSON for map visualization
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  // Relations
+  parent     Region?     @relation("RegionHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
+  children   Region[]    @relation("RegionHierarchy")
+  dataPoints DataPoint[] @relation("RegionDataPoints")
+
+  // Indexes for common queries
+  @@index([code])
+  @@index([type])
+  @@index([parentId])
+  @@map("regions")
+}
+
+/// Indicators/metrics that are tracked across regions
+/// Each indicator belongs to a category and can have multiple data points
+model Indicator {
+  id          String   @id @default(uuid())
+  category    Category // Category of the indicator
+  name        String   @db.VarChar(200) // e.g., "Abortion rate per 1000 women"
+  description String   @db.Text // Detailed description
+  unit        String   @db.VarChar(50) // e.g., "per 1000", "percentage", "count"
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  dataPoints DataPoint[] @relation("IndicatorDataPoints")
+
+  // Constraints
+  @@unique([category, name]) // Unique indicator per category
+  @@index([category]) // Index for filtering by category
+  @@map("indicators")
+}
+
+/// Actual data values for indicators in specific regions at specific dates
+/// Central table linking indicators, regions, sources, and temporal data
+model DataPoint {
+  id          String   @id @default(uuid())
+  indicatorId String   @map("indicator_id")
+  regionId    String   @map("region_id")
+  date        DateTime @db.Date // Date of the measurement
+  value       Decimal  @db.Decimal(18, 4) // Numeric value
+  sourceId    String   @map("source_id") // Data source reference
+  metadata    Json? // Flexible JSON for additional context (confidence, method, notes, etc.)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  indicator Indicator  @relation("IndicatorDataPoints", fields: [indicatorId], references: [id], onDelete: Cascade)
+  region    Region     @relation("RegionDataPoints", fields: [regionId], references: [id], onDelete: Cascade)
+  source    DataSource @relation("SourceDataPoints", fields: [sourceId], references: [id], onDelete: Restrict)
+
+  // Constraints and indexes
+  @@unique([indicatorId, regionId, date, sourceId]) // Prevent duplicate entries
+  @@index([indicatorId, regionId, date]) // Common query pattern
+  @@index([date]) // Time-series queries
+  @@index([sourceId]) // Filter by source
+  @@map("data_points")
+}
+
+/// External data sources (APIs, organizations) that provide data
+/// Tracks reliability and metadata for each source
+model DataSource {
+  id           String    @id @default(uuid())
+  name         String    @unique @db.VarChar(200) // e.g., "WHO", "World Bank"
+  organization String    @db.VarChar(200) // Full organization name
+  url          String    @db.Text // Website URL
+  apiEndpoint  String?   @map("api_endpoint") @db.Text // API endpoint if available
+  reliability  Int       @default(5) // Reliability score 1-10
+  lastUpdated  DateTime? @map("last_updated") // Last time data was fetched
+  createdAt    DateTime  @default(now()) @map("created_at")
+
+  // Relations
+  dataPoints DataPoint[] @relation("SourceDataPoints")
+  apiLogs    ApiLog[]    @relation("SourceApiLogs")
+
+  @@map("data_sources")
+}
+
+/// Logs of API calls to external data sources
+/// Used for monitoring, debugging, and analytics of external integrations
+model ApiLog {
+  id           String   @id @default(uuid())
+  sourceId     String   @map("source_id")
+  endpoint     String   @db.Text // API endpoint called
+  statusCode   Int      @map("status_code") // HTTP status code
+  responseTime Int      @map("response_time") // Response time in milliseconds
+  errorMessage String?  @map("error_message") @db.Text // Error message if failed
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  // Relations
+  source DataSource @relation("SourceApiLogs", fields: [sourceId], references: [id], onDelete: Cascade)
+
+  // Indexes for analytics and monitoring
+  @@index([sourceId, createdAt]) // Query logs by source and time
+  @@index([statusCode]) // Filter by success/failure
+  @@map("api_logs")
+}
