@@ -133,7 +133,9 @@ async function main() {
       }
     }
 
-    logger.info(`✅ Created ${1 + continents.length + createdCountries.length} regions`);
+    logger.info(
+      `✅ Created ${1 + continents.length + createdCountries.length} regions`,
+    );
 
     // ==========================================
     // 2. SEED DATA SOURCES
@@ -242,8 +244,7 @@ async function main() {
       {
         category: Category.euthanasia,
         name: 'Aprobación pública de eutanasia',
-        description:
-          'Porcentaje de población que aprueba la eutanasia legal',
+        description: 'Porcentaje de población que aprueba la eutanasia legal',
         unit: 'porcentaje',
       },
       // Gender ideology category
@@ -285,8 +286,7 @@ async function main() {
       {
         category: Category.drugs,
         name: 'Tasa de legalización de drogas',
-        description:
-          'Número de países con políticas de legalización de drogas',
+        description: 'Número de países con políticas de legalización de drogas',
         unit: 'cantidad',
       },
       {
@@ -464,4 +464,3 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
-

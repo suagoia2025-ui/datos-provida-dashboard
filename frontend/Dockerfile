@@ -1,19 +1,35 @@
-FROM node:18-alpine
+FROM node:18-alpine AS base
 
 # Crear directorio de trabajo
 WORKDIR /app
 
-# Copiar archivos de dependencias y configuración
+# ========================================
+# Dependencies stage
+# ========================================
+FROM base AS dependencies
+
+# Copiar archivos de dependencias
 COPY package*.json ./
+
+# Instalar dependencias
+RUN npm ci
+
+# ========================================
+# Development stage
+# ========================================
+FROM base AS development
+
+# Copiar dependencias instaladas
+COPY --from=dependencies /app/node_modules ./node_modules
+COPY --from=dependencies /app/package*.json ./
+
+# Copiar archivos de configuración
 COPY tsconfig.json ./
 COPY next.config.js ./
 COPY tailwind.config.js ./
 COPY postcss.config.js ./
 
-# Instalar dependencias
-RUN npm ci
-
-# Copiar el resto del código
+# Copiar código fuente
 COPY . .
 
 # Exponer puerto

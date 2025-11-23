@@ -11,23 +11,27 @@ API REST profesional para el Dashboard de Datos Pro-Vida, construido con Node.js
 ## 🚀 Instalación
 
 1. Instalar dependencias:
+
 ```bash
 npm install
 ```
 
 2. Configurar variables de entorno:
+
 ```bash
 cp .env.example .env
 # Editar .env con tus valores
 ```
 
 3. Configurar Prisma:
+
 ```bash
 npx prisma generate
 # Cuando tengas modelos: npx prisma migrate dev
 ```
 
 4. Iniciar en desarrollo:
+
 ```bash
 npm run dev
 ```
@@ -94,6 +98,7 @@ El proyecto sigue una arquitectura en capas (Layered Architecture) con el patró
 ## 🌐 Endpoints
 
 ### Health Check
+
 - `GET /api/v1/health` - Estado del servidor
 
 ## 🔒 Seguridad

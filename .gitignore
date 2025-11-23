@@ -1,11 +1,21 @@
-# General
-.DS_Store
+# Dependencies
 node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
-# Env files
+# Build outputs
+dist/
+.next/
+out/
+build/
+*.tsbuildinfo
+
+# Environment variables
 .env
 .env.local
 .env.*.local
+.env.docker
 
 # Logs
 *.log
@@ -13,15 +23,51 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+lerna-debug.log*
 
-# Next.js
-.next/
-out/
-.turbo/
-dist/
-build/
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
 
-# Editor
+# IDEs
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
 
+# Testing
+coverage/
+.nyc_output/
+*.lcov
+.jest/
+
+# Misc
+.cache/
+temp/
+tmp/
+*.tmp
+
+# Docker
+.dockerignore
+
+# Prisma
+prisma/migrations/
+
+# Next.js
+.turbo/
+.vercel/
+
+# TypeScript
+*.tsbuildinfo
