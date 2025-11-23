@@ -50,13 +50,27 @@ datos-provida-dashboard/
 
 ### Instalación Local
 
+#### Opción 1: Docker Compose (Recomendado)
+
 ```bash
 # Clonar el repositorio
 git clone https://github.com/tu-usuario/datos-provida-dashboard.git
 cd datos-provida-dashboard
 
-# Levantar servicios con Docker
+# Levantar todos los servicios
 docker-compose up -d
+
+# Ejecutar migraciones y seeds
+docker-compose exec backend npx prisma migrate dev --name init
+docker-compose exec backend npm run seed
+```
+
+#### Opción 2: Instalación Manual
+
+```bash
+# Clonar el repositorio
+git clone https://github.com/tu-usuario/datos-provida-dashboard.git
+cd datos-provida-dashboard
 
 # Instalar dependencias del frontend
 cd frontend
@@ -67,6 +81,91 @@ npm run dev
 cd ../backend
 npm install
 npm run dev
+```
+
+## 🐳 Docker Setup (Recomendado)
+
+### Prerrequisitos
+
+- Docker Desktop instalado
+- Docker Compose v2.0+
+
+### Iniciar todo el proyecto
+
+```bash
+# Iniciar todos los servicios
+docker-compose up -d
+
+# Ver logs
+docker-compose logs -f
+
+# Ver logs de un servicio específico
+docker-compose logs -f backend
+docker-compose logs -f frontend
+docker-compose logs -f postgres
+```
+
+### Ejecutar migraciones y seeds
+
+```bash
+# Entrar al contenedor del backend
+docker-compose exec backend sh
+
+# Dentro del contenedor:
+npx prisma migrate dev --name init
+npm run seed
+exit
+```
+
+### Verificar servicios
+
+- **Frontend:** http://localhost:3000
+- **Backend:** http://localhost:4000/api/v1/health
+- **PostgreSQL:** localhost:5433 (puerto externo, 5432 dentro del contenedor)
+
+### Comandos útiles
+
+```bash
+# Detener servicios
+docker-compose down
+
+# Detener y eliminar volúmenes (CUIDADO: borra la BD)
+docker-compose down -v
+
+# Reconstruir imágenes
+docker-compose build
+
+# Reiniciar un servicio específico
+docker-compose restart backend
+
+# Ver estado de servicios
+docker-compose ps
+
+# Abrir shell en contenedor
+docker-compose exec backend sh
+docker-compose exec frontend sh
+
+# Ver logs en tiempo real
+docker-compose logs -f
+```
+
+### Troubleshooting
+
+**Puerto ocupado:**
+
+```bash
+# Detener servicios locales que usen puertos 3000, 4000, 5432
+lsof -ti:3000 | xargs kill -9
+lsof -ti:4000 | xargs kill -9
+lsof -ti:5432 | xargs kill -9
+```
+
+**Rebuild desde cero:**
+
+```bash
+docker-compose down -v
+docker-compose build --no-cache
+docker-compose up -d
 ```
 
 ## 📚 Documentación
